@@ -1,7 +1,7 @@
 # QuickPass
 generate secure pronounceable passwords from the Mac OS menubar
 
-## Download latest release
+## Download latest release 64bit 10.13+
 [release.zip](https://github.com/gulas2vladimir/QuickPass/releases/tag/latest)
 
 ## Screenshot

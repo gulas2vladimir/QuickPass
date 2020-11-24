@@ -28,14 +28,17 @@
 #import "QPInfoWindow.h"
 
 @implementation QPInfoWindow
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag {
-    NSWindow* result = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+- (id)initWithContentRect:(NSRect)contentRect
+                styleMask:(NSWindowStyleMask)aStyle
+                  backing:(NSBackingStoreType)bufferingType
+                    defer:(BOOL)flag {
+    NSWindow* result = [super initWithContentRect:contentRect styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO];
     [result setBackgroundColor: [NSColor clearColor]];
     [result setLevel: NSStatusWindowLevel];
     [result setAlphaValue:0.8];
     [result setOpaque:NO];
     [result setHasShadow: YES];
-    return result;
+    return self;
 }
 
 - (void)fadeOut

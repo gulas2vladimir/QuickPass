@@ -26,4 +26,4 @@
  */
 
 char *getPWD(int password_length);
-void seedPWD();
+void seedPWD(void);

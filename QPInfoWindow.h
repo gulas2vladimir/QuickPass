@@ -29,8 +29,8 @@
 
 @interface QPInfoWindow : NSWindow
 {
-	//float fadePos;
-	//NSTimer *fadeTimer;
+	float fadePos;
+	NSTimer *fadeTimer;
 }
 - (void)fadeIn;
 - (void)fadeOut;

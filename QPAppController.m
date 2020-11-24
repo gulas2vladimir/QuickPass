@@ -32,13 +32,6 @@
 - (NSRect)hackFrame;
 @end
 
-@implementation NSStatusItem (Hack)
-- (NSRect)hackFrame
-{
-    return [_fWindow frame];
-}
-@end
-
 @implementation QPAppController
 + (void)initialize {
 	NSDictionary *defaultValues=[NSDictionary dictionaryWithObjectsAndKeys:
@@ -59,13 +52,13 @@
 			
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaultValues];
-	srand ( time(NULL) );
+    srand( (unsigned int) time(NULL) );
 	seedPWD();
 }
 
 - (IBAction) toggleStartup:(id)sender
 {
-	if ([sender state]==NSOnState) {
+    if ([sender state]==NSControlStateValueOn) {
 		[self addStartupItem];
 	} else {
 		[self removeStartupItem];
@@ -144,7 +137,7 @@
     theItem = [bar statusItemWithLength:NSVariableStatusItemLength];
 	
     [theItem retain];
-	[theItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"key" ofType:@"png"]]];
+	[theItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"key-white" ofType:@"png"]]];
 	[theItem setAlternateImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"key-white" ofType:@"png"]]];
     [theItem setHighlightMode:YES];
 	[theItem setAction:@selector(refreshMenu)];
@@ -242,8 +235,8 @@
 -(void)copyMenuEntry:(NSMenuItem *)test
 {
 	NSPasteboard *pboard=[NSPasteboard generalPasteboard];
-	[pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
-	if (![pboard setString:[test title] forType:NSStringPboardType]) {
+    [pboard declareTypes:[NSArray arrayWithObject:NSPasteboardTypeString] owner:self];
+    if (![pboard setString:[test title] forType:NSPasteboardTypeString]) {
 		NSLog(@"Error");
 	}
 }
@@ -252,11 +245,12 @@
 	[NSApp terminate:self];
 }
 
+/*
 -(IBAction) about:(id)sender {
 	[helpWindow fadeOut];
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.sourcebricks.com/page/quickpass.html?qpabout=true"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"about://blank"]];
 }
-
+*/
 -(IBAction) preferences:(id)sender {
 	[NSApp activateIgnoringOtherApps:YES];
 	[prefsWindow setAlphaValue:0];

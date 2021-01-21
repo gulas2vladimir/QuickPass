@@ -42,7 +42,7 @@
 - (IBAction)hideInfo:(id)sender;
 - (IBAction) closeApp:(id)sender;
 - (IBAction) preferences:(id)sender;
-// - (IBAction) about:(id)sender;
+- (IBAction) about:(id)sender;
 - (void) activateStatusMenu;
 - (IBAction) toggleStartup:(id)sender;
 - (IBAction) resetChars:(id)sender;

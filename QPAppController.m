@@ -28,10 +28,6 @@
 #import "QPAppController.h"
 #include "pronpas.h"
 
-@interface NSStatusItem (Hack)
-- (NSRect)hackFrame;
-@end
-
 @implementation QPAppController
 + (void)initialize {
 	NSDictionary *defaultValues=[NSDictionary dictionaryWithObjectsAndKeys:
@@ -112,22 +108,10 @@
 
 - (IBAction)showInfo:(id)sender
 {
-	NSRect screenRect = [[NSScreen mainScreen] frame];
-	if (myTimer)
-		[myTimer invalidate];
-	float left=[theItem hackFrame].origin.x;
-	NSPoint winframe=NSMakePoint(left-268 , screenRect.size.height-200);
-	[helpWindow setFrameOrigin:winframe];
-	[helpWindow fadeIn];
-	myTimer=[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideInfo:) userInfo:nil repeats:NO];
 }
 
 - (IBAction)hideInfo:(id)sender
 {
-	if (myTimer)
-		[myTimer invalidate];
-	myTimer=nil;
-	[helpWindow fadeOut];
 }
 
 - (void)activateStatusMenu
@@ -245,12 +229,11 @@
 	[NSApp terminate:self];
 }
 
-/*
+
 -(IBAction) about:(id)sender {
 	[helpWindow fadeOut];
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"about://blank"]];
 }
-*/
+
 -(IBAction) preferences:(id)sender {
 	[NSApp activateIgnoringOtherApps:YES];
 	[prefsWindow setAlphaValue:0];
